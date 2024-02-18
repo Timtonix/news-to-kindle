@@ -6,7 +6,7 @@ class International:
         self.con = sqlite3.connect("international.db")
         self.cursor = self.con.cursor()
         self.cursor.execute(
-            """CREATE TABLE IF NOT EXISTS journeaux(date TEXT NOT NULL, lien TEXT NOT NULL, timestamp INTEGER NOT NULL)"""
+            """CREATE TABLE IF NOT EXISTS journeaux(id INT  PRIMARY KEY NOT NULL, titre TEXT NOT NULL, lien TEXT NOT NULL, date TEXT NOT NULL)"""
         )
 
         self.con.commit()
@@ -16,7 +16,8 @@ class International:
         self.con.commit()
 
     def get_journeaux(self):
-        self.cursor.execute("SELECT * FROM journeaux ORDER BY timestamp")
+        self.cursor.execute("SELECT * FROM journeaux ORDER BY numero")
+        return self.cursor.fetchall()
 
 
 
