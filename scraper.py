@@ -5,14 +5,16 @@ import bdd
 
 class InterScraper:
     def __init__(self):
-        self.base_url = "https://www.courrierinternational.com/magazine"
-        self.r = requests.get(self.base_url)
+        self.base_url = "https://www.courrierinternational.com/"
+        self.r = requests.get(self.base_url + "magazine")
         self.soup = BeautifulSoup(self.r.text, "html.parser")
         self.bdd = bdd.International()
 
     def reload_soup(self):
         self.r = requests.get(self.base_url)
         self.soup = BeautifulSoup(self.r.text, "html.parser")
+
+
 
     def get_last_article(self):
         articles = self.soup.findAll("article")
@@ -35,3 +37,6 @@ class InterScraper:
 
                 self.bdd.cursor.execute("INSERT INTO journeaux VALUES (?,?,?,?)", (numero, titre, lien, date))
             self.bdd.con.commit()
+
+    def connect_to_inter(self):
+        pass

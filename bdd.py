@@ -8,6 +8,9 @@ class International:
         self.cursor.execute(
             """CREATE TABLE IF NOT EXISTS journeaux(numero INT NOT NULL, titre TEXT NOT NULL, lien TEXT NOT NULL, date TEXT NOT NULL)"""
         )
+        self.cursor.execute(
+            """CREATE TABLE IF NOT EXISTS downloaded(lien TEXT NOT NULL, numero INT NOT NULL)"""
+        )
 
         self.con.commit()
 
